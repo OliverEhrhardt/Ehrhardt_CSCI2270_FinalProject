@@ -47,6 +47,28 @@ int main()
     //pop method only needs string to remove from hash table.
     someHash.pop("apple");
     someHash.print(false);
+    //getStringData get's int data associated with the string provided
+    int someInt = someHash.getStringData("bananna");
+    cout<<"Int data: "<<someInt<<endl;
+
+    /*
+    StringTree is a Red-Black tree data structure class,
+    you can declare it like you would declare any object.
+    */
+
+    StringTree someTree;
+    //push method needs an integer value as data storage.
+    someTree.push("apple", 4); someTree.push("bananna", 3); someTree.push("clover", 21);
+    //print method need boolean value to determine the order of traversal.
+    cout<<"alphabetical order:"<<endl;
+    someTree.print(true);
+    cout<<"reverse order:"<<endl;
+    someTree.print(false);
+    //pop method needs string of desired node to delete.
+    someTree.pop("apple");
+    cout<<"deleted apple:"<<endl;
+    someTree.print(true);
+
 
 
 
