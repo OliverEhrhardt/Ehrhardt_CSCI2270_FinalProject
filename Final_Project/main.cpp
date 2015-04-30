@@ -24,29 +24,32 @@ int main()
     //sort...
     StringSorter::sortAlphabetically(someStrings, true);
     cout<<"after sort:"<<endl;
-    for(int i=0;, i<someStrings.size();i++){
+    for(int i=0; i<someStrings.size();i++){
         cout<<someStrings[i]<<" ";
     }
     cout<<endl;
-    
+
     /*
-     StringHash is a hash table class. You can use it by simply declaring an object of type StringHash and 
-     passing an integer value to represent the size of the hash table. Overloaded indexes are resolved 
-     by chaining, so the hashtable will be less efficient depending on the number of strings that produce the 
+     StringHash is a hash table class. You can use it by simply declaring an object of type StringHash and
+     passing an integer value to represent the size of the hash table. Overloaded indexes are resolved
+     by chaining, so the hashtable will be less efficient depending on the number of strings that produce the
      same hash sum.
      Example:
      */
-    
+
     StringHash someHash(10);
     //push method needs an integer value as data storage.
     someHash.push("apple", 4);someHash.push("bananna", 3);someHash.push("clover", 21);
     cout<<"in order traversal:"<<endl;
     someHash.print();
-    cout<<"alphabetical order"<<enld;
+    cout<<"alphabetical order"<<endl;
     someHash.print(true); //pass false for descending order
-    
+    //pop method only needs string to remove from hash table.
+    someHash.pop("apple");
+    someHash.print(false);
 
-    
+
+
 
 
     return 0;

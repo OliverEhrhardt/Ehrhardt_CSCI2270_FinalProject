@@ -85,14 +85,13 @@ Postcondition: List of what's in StringHash posted on the terminal.
 */
 
 void StringHash::print(){
+    hashElm *temp;
     for(int i=0;i<hashSize;i++){
-        hashElm *temp; temp = hashTable[i];
-        if(temp != NULL){
-            cout<<temp->title<<endl;
-            while(temp->next != NULL){
-                temp = temp->next;
-                cout<<temp->title<<endl;
-            }
+        temp = hashTable[i];
+        while(temp != NULL){
+            string yes = hashTable[i]->title;
+            cout<<temp->title<<":"<<temp->data<<endl;
+            temp = temp->next;
         }
     }
 }
@@ -164,6 +163,7 @@ void StringHash::push(string title, int data){
 //constructor
 StringHash::StringHash(int i){
     hashTable = new hashElm*[i];
+
     hashSize = i;
 }
 //constructor

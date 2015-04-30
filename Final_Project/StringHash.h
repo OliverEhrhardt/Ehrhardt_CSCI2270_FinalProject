@@ -6,8 +6,11 @@ struct hashElm{
     hashElm *next;
     int data;
 
-    hashElm();
+    hashElm(){
+        next = NULL;
+    }
     hashElm(std::string in_string, int in_int){
+        next = NULL;
         title = in_string;
         data = in_int;
     }
@@ -22,7 +25,7 @@ public:
     void pop(std::string);
     void print();
     void print(bool);
-    std::string getString(std::string);
+    int getStringData(std::string);
 private:
     hashElm **hashTable;
     int hashSum(std::string);
