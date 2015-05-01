@@ -11,6 +11,7 @@ using namespace std;
 int main()
 {
     /*
+    To use the StringSorter methods, you include the "StringSorter.h" reference in you header.
      StringSorter is the base class of the library. It really only has one function which is
      the alphabetical sort method. Simply put a vector of strings and run the method like so.
      */
@@ -30,6 +31,7 @@ int main()
     cout<<endl;
 
     /*
+    To use StringHash methods, include "StringHash.h" in you header.
      StringHash is a hash table class. You can use it by simply declaring an object of type StringHash and
      passing an integer value to represent the size of the hash table. Overloaded indexes are resolved
      by chaining, so the hashtable will be less efficient depending on the number of strings that produce the
@@ -45,6 +47,7 @@ int main()
     cout<<"alphabetical order"<<endl;
     someHash.print(true); //pass false for descending order
     //pop method only needs string to remove from hash table.
+    cout<<"remove apple:"<<endl;
     someHash.pop("apple");
     someHash.print(false);
     //getStringData get's int data associated with the string provided
@@ -52,8 +55,11 @@ int main()
     cout<<"Int data: "<<someInt<<endl;
 
     /*
-    StringTree is a Red-Black tree data structure class,
+    To use the StringTree methods, include "StringTree.h" in the header file.
+    StringTree is a Red-Black tree data structure class, it will order all the strings alphabetically
+    and has log(n) complexity making it efficient.
     you can declare it like you would declare any object.
+    Example:
     */
 
     StringTree someTree;
