@@ -1,5 +1,6 @@
 #ifndef STRINGHASH_H_INCLUDED
 #define STRINGHASH_H_INCLUDED
+#include <string>
 
 struct hashElm{
     std::string title;
@@ -16,7 +17,7 @@ struct hashElm{
     }
 };
 
-class StringHash:public StringSorter{
+class StringHash{
 public:
     StringHash(int);
     StringHash();

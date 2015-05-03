@@ -1,5 +1,6 @@
 #ifndef STRINGTREE_H_INCLUDED
 #define STRINGTREE_H_INCLUDED
+#include <string>
 
 struct treeElm{
     std::string title;
@@ -17,7 +18,7 @@ struct treeElm{
     }
 };
 
-class StringTree: public StringSorter{
+class StringTree{
 public:
     StringTree();
     ~StringTree();

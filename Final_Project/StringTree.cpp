@@ -23,6 +23,122 @@ treeElm* StringTree::findMin(treeElm *node){
     return node;
 }
 
+
+
+/*
+Function prototype: void pop(std::string);
+Function description:Deletes item of provided string
+Example:
+StringTree example;
+... add data
+example.pop(string data);
+Pre-condition: a StringTree object with string inside.
+Post condition: a StringTree object with the undesired node removed.
+*/
+
+void StringTree::pop(string title){
+    treeElm *temp; temp = root;
+    while(temp != NULL){
+        if(temp->title == title){
+            StringTree::rbDelete(temp);
+            return;
+        }
+        else if(StringSorter::isABigger(temp->title, title)){
+            temp = temp->left;
+        }else{
+            temp = temp->right;
+        }
+    }
+    if(temp == NULL){
+        cout<<"String not found"<<endl;
+    }
+}
+
+void StringTree::AcendingPrint(treeElm *node){
+    if(node->left != nil){
+        StringTree::AcendingPrint(node->left);
+    }
+    cout<<node->title<<endl;
+    if(node->right != nil){
+        StringTree::AcendingPrint(node->right);
+    }
+}
+
+void StringTree::DecendingPrint(treeElm *node){
+    if(node->right != nil){
+        StringTree::DecendingPrint(node->right);
+    }
+    cout<<node->title<<endl;
+    if(node->left != nil){
+        StringTree::DecendingPrint(node->left);
+    }
+}
+
+/*
+Function prototype: void print(bool);
+Function description: prints contents in StringTree in either alphabetical or reverse alphabetical order
+depending on boolean value.
+Example:
+StringTree example;
+... fill with data
+example.print(true);
+Pre condtion:A StringTree object with data inside.
+Post condtion: A list of what is inside the StringTree object in either alphabetical or reverse
+alphabetical order to the console.
+*/
+
+void StringTree::print(bool isAcending){
+    if(isAcending){
+        StringTree::AcendingPrint(root);
+    }else{
+        StringTree::DecendingPrint(root);
+    }
+}
+
+/*
+Function prototype: void push(std::string, int);
+Function description: adds a node to StringTree object.
+Example:
+StringTree example;
+example.push("Forest Gump", 3);
+Pre condtion: a String Tree object
+Post condtion: the original StringTree object with a new node attached to it.
+*/
+
+void StringTree::push(std::string title, int data){
+    treeElm *newNode; newNode = new treeElm(title, data);
+    newNode->right = nil; newNode->left = nil; newNode->isRed = true; newNode->parent == nil;
+    treeElm *child; treeElm *parent;
+    child = root; parent = nil;
+    while(child != nil){
+        if(StringSorter::isABigger(child->title,newNode->title)){
+            parent = child;
+            child = parent->left;
+        }else{
+            parent = child;
+            child = parent->right;
+        }
+    }
+    if(child == nil){
+        if(parent == nil){
+            newNode->parent = nil;
+            root = newNode;
+            StringTree::rbPushFix(newNode);
+        }else{
+            if(StringSorter::isABigger(parent->title,newNode->title)){
+                parent->left = newNode;
+            }else{
+                parent->right = newNode;
+            }
+            newNode->parent = parent;
+            StringTree::rbPushFix(newNode);
+        }
+    }
+}
+
+
+//EVERYTHING BELOW THIS IS MERELY RED BLACK TREE CHECKING
+
 void StringTree::rbDelete(treeElm *node){
     treeElm *y; treeElm *x;
     y = node;
@@ -59,84 +175,6 @@ void StringTree::rbDelete(treeElm *node){
         StringTree::rbPopFix(x);
     }
 }
-
-void StringTree::pop(string title){
-    treeElm *temp; temp = root;
-    while(temp != NULL){
-        if(temp->title == title){
-            StringTree::rbDelete(temp);
-            return;
-        }
-        else if(isABigger(temp->title, title)){
-            temp = temp->left;
-        }else{
-            temp = temp->right;
-        }
-    }
-    if(temp == NULL){
-        cout<<"String not found"<<endl;
-    }
-}
-
-void StringTree::AcendingPrint(treeElm *node){
-    if(node->left != nil){
-        StringTree::AcendingPrint(node->left);
-    }
-    cout<<node->title<<endl;
-    if(node->right != nil){
-        StringTree::AcendingPrint(node->right);
-    }
-}
-
-void StringTree::DecendingPrint(treeElm *node){
-    if(node->right != nil){
-        StringTree::DecendingPrint(node->right);
-    }
-    cout<<node->title<<endl;
-    if(node->left != nil){
-        StringTree::DecendingPrint(node->left);
-    }
-}
-
-void StringTree::print(bool isAcending){
-    if(isAcending){
-        StringTree::AcendingPrint(root);
-    }else{
-        StringTree::DecendingPrint(root);
-    }
-}
-
-void StringTree::push(std::string title, int data){
-    treeElm *newNode; newNode = new treeElm(title, data);
-    newNode->right = nil; newNode->left = nil; newNode->isRed = true; newNode->parent == nil;
-    treeElm *child; treeElm *parent;
-    child = root; parent = nil;
-    while(child != nil){
-        if(StringSorter::isABigger(child->title,newNode->title)){
-            parent = child;
-            child = parent->left;
-        }else{
-            parent = child;
-            child = parent->right;
-        }
-    }
-    if(child == nil){
-        if(parent == nil){
-            newNode->parent = nil;
-            root = newNode;
-            StringTree::rbPushFix(newNode);
-        }else{
-            if(StringSorter::isABigger(parent->title,newNode->title)){
-                parent->left = newNode;
-            }else{
-                parent->right = newNode;
-            }
-            newNode->parent = parent;
-            StringTree::rbPushFix(newNode);
-        }
-    }
-}
-
 
 void StringTree::rbPushFix(treeElm *node){
     node->right = nil; node->left = nil;
